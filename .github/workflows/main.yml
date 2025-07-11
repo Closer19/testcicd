@@ -25,7 +25,7 @@ jobs:
       # 3. MySQL Docker 이미지 빌드 및 푸시
       - name: Build MySQL Docker image
         working-directory: db # docker_test_db 폴더로 이동
-        run: | 
+        run: | #쉘 명령어(스크립트)를 실행
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dockerdb .
           
       - name: Push MySQL Docker image
@@ -51,7 +51,7 @@ jobs:
           username: ubuntu
           host: ${{ secrets.LIVE_SERVER_IP }}
           key: ${{ secrets.EC2_SSH_KEY }}    
-          script: |
+          script: |  #uses 키워드를 사용하여 액션을 호출할 때 입력 값(input) 으로 사용됨
             if [ "$(sudo docker ps -a -q -f name=dockerdb)" ]; then
               sudo docker rm -f dockerdb
             fi
